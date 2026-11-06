@@ -18,8 +18,8 @@
         );
     }
 
-    function getPlayers(PDO $pdo): array {
-        $sql = "SELECT player_username FROM player";
+    function getPlayersUsername(PDO $pdo): array {
+        $sql = "SELECT player_id, player_username FROM player";
         $stmt = $pdo -> query($sql);
         return $stmt -> fetchAll(PDO::FETCH_ASSOC);
     }
@@ -32,5 +32,16 @@
             ["player_username" => $playerUsername]
         );
         return $pdo -> lastInsertId();
+    }
+
+    function getPlayerAttributById(PDO $pdo, int $playerId): ?array {
+        $sql = "SELECT player_id, player_username, health, energy, food FROM player
+                WHERE player_id = :playerId";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(
+            ["playerId" => $playerId]
+        );
+        $player = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $player === false ? null : $player;
     }
 ?>

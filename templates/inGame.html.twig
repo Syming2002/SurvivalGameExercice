@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+{% block inGame %}
+<style>
+    .player-chosen {
+        text-align: center;
+        margin-top: 25px;
+    }
+    .button-group-section {
+        display: flex;
+        justify-content: center;
+        gap: calc(25px - 5px);
+        margin-top: 50px;
+    }
+    .action-button {
+        width: calc(120px - 25px);
+        height: calc(75px - 15px);
+    }
+    .walk {
+        background-color: brown;
+        color: white;
+    }
+    .run {
+        background-color: darkolivegreen;
+        color: white;
+    }
+    .sleep {
+        background-color: darkblue;
+        color: white;
+    }
+    .beat {
+        background-color: red;
+        color: white;
+    }
+    .build {
+        background-color: grey;
+        color: white;
+    }
+    .rest {
+        background-color: blue;
+        color: white;
+    }
+    .gather {
+        background-color: yellowgreen;
+        color: black;
+    }
+    .player-attribut-section {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 50px;
+    }
+</style>
+    {% if selectedPlayer is not empty %}
+        <h1 class="player-chosen">Player chosen: {{selectedPlayer.player_username}}</h1>
+            <section class="button-group-section">
+            {% for action in actions %}
+                <button class="action-button {{action.action_name}}">{{action.action_name}}</button>
+            {% endfor%}
+            </section>
+            <section class="player-attribut-section">
+                <p>Health: {{selectedPlayer.health}}</p>
+                <p>Energy: {{selectedPlayer.energy}}</p>
+                <p>Food: {{selectedPlayer.food}}</p>
+            </section>
+    {% else %}
+        <p>Please choose a player to start the game.</p>
+    {% endif %}
+         
+{% endblock %}
