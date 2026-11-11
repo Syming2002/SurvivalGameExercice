@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block connexion %}
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+    .choose-player-name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+    .player-username-label {
+        margin-top: 25px;
+    }
+    .no-player {
+        margin-top: 25px;
+        text-align: center;
+    }
+    .button {
+        background-color: grey;
+        color: white;
+        font-family: monocraft;
+        src: url("../fonts/Monocraft.ttf");
+        width: calc(200px - 32px);
+        height: calc(75px - 24px);
+    }
+    .start-button {
+        margin-top: 25px;
+    }
+</style>
+    <form class="choose-player-name" action="connexion.php" method="POST">
+        <label class="player-username-label" for="player_username">Username</label>
+        <input type="text" name="player_username" id="player_username" required>
+        <label class="player-password-label" for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <button class="button start-button" type="submit">Start the game</button>
+    </form>
+{% endblock %}

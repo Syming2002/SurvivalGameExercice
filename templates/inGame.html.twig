@@ -5,6 +5,10 @@
         text-align: center;
         margin-top: 25px;
     }
+    .day-left-title {
+        text-align: center;
+        margin-top: 25px;
+    }
     .button-group-section {
         display: flex;
         justify-content: center;
@@ -52,16 +56,27 @@
 </style>
     {% if selectedPlayer is not empty %}
         <h1 class="player-chosen">Player chosen: {{selectedPlayer.player_username}}</h1>
+        <h2 class="day-left-title">Day Left before Victory:</h2>
             <section class="button-group-section">
-            {% for action in actions %}
-                <button class="action-button {{action.action_name}}">{{action.action_name}}</button>
-            {% endfor%}
+            <form action="inGame.php" method="POST">
+            <input type="hidden" name="player_id" value="{{selectedPlayer.player_id}}">
+                {% for action in actions %}
+                    <button type="submit" class="action-button {{action.action_name}}" name="action_name" value="{{action.action_name}}" style="font-family: monocraft";">{{action.action_name}}</button>
+                {% endfor %}
+            </form>
             </section>
             <section class="player-attribut-section">
                 <p>Health: {{selectedPlayer.health}}</p>
                 <p>Energy: {{selectedPlayer.energy}}</p>
                 <p>Food: {{selectedPlayer.food}}</p>
             </section>
+        
+                <form action="index.php" method="POST">
+                    <button style="position: absolute; left: 25px; bottom: 25px; color: white; background-color: grey; width: 100px; height: 50px; font-family: monocraft;" type="submit" name="exit">
+                        Exit
+                    </button>
+                </form>
+        
     {% else %}
         <p>Please choose a player to start the game.</p>
     {% endif %}

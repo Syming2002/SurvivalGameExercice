@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block createPlayer %}
+<style>
+.form-register {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+    gap: 25px;
+}
+#username {
+    font-family: monocraft;
+    src: url("../fonts/Monocraft.ttf");
+}
+.button {
+    font-family: monocraft;
+    src: url("../fonts/Monocraft.ttf");
+    background-color: grey;
+    width: calc(200px - 32px);
+    height: calc(75px - 24px);
+    color: white;
+}
+.form-connexion {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+}
+</style>
+    <form class="form-register" method="POST" action="register.php">
+        <label for="player_username">Choose an Username</label>
+        <input type="text" name="player_username" id="player_username" required>
+        <label for="password">Choose a password</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit" class="button">
+            Register a player
+        </button>
+    </form>
+    <form class="form-connexion" method="GET" action="connexion.php">
+        <button type="submit" class="button">
+            Connexion
+        </button>
+    </form>
+{% endblock %}

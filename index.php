@@ -5,44 +5,45 @@ require_once __DIR__ . "/database/database.php";
 require_once __DIR__ . "/vendor/autoload.php";
 require_once __DIR__ . "/public/functions.php";
 
-$player = new Player($pdo);
-$players = $player -> getAllPlayersName();
+// $player = new Player($pdo);
 
-$message = '';
-$addPlayer = 0;
+// $playerByName = null;
+
+// $message = '';
+// $addPlayer = 0;
+
+// if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//     $userName = trim($_POST["player_username"] ?? '');
+//     $password = trim($_POST["password"] ?? '');
+
+//     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+//     $player->getPlayerByUsername($userName);
+
+//     if (
+//         $userName !== ''
+//     ) {
+//         $addPlayer = $player->addPlayer($userName, $passwordHash);
+//     } else if ($userName === $userName) {
+//         $message = "Enter a valid Username";
+//     }
+// }
 
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $userName = trim($_POST["player_username"] ?? '');
-
-    if (
-        $userName !== ''
-    ) {
-        $addPlayer = $player->addPlayer($userName);
-    } else {
-        $message = "Enter a valid Username";
-    }
-}
 
 
+// $loader = new Twig\Loader\FilesystemLoader(
+//     __DIR__ . "/templates"
+// );
 
+// $twig = new Twig\Environment($loader);
 
-$loader = new Twig\Loader\FilesystemLoader(
-    __DIR__ . "/templates"
-);
+// // afficher les templates
+// echo $twig->render("header.html.twig", []);
 
-$twig = new Twig\Environment($loader);
-
-// afficher les templates
-echo $twig->render("header.html.twig", []);
-
-echo $twig->render("addPlayer.html.twig", [
-    "addPlayer" => $addPlayer
-]);
-
-echo $twig->render("playerSelection.html.twig", [
-    "players" => $players
-]);
+// echo $twig->render("connexion.html.twig", [
+//     "players" => $playerByName
+// ]);
 
 
 ?>
