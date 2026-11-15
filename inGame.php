@@ -80,12 +80,35 @@ if($selectedPlayerId !== null) {
                 break;
             
             case 'build':
-                $energyChange = -10;
-                $foodChange = -5;
+                if ($_SESSION["energy"] > 0 || $_SESSION["food"] > 0) {
+                    $removedResource = $resource->removeRandomResources(
+                        $_SESSION["resources_quantity"][$playerId]
+                    );
+
+                    if ($removedResource !== null) {
+                        $resourceId = $removedResource["resource_id"];
+                        $_SESSION["resources_quantity"][$playerId][$resourceId] -= $removedResource["quantity"];
+                        $energyChange = -10;
+                        $foodChange = -5;
+                    }
+                }
+                break;
+            case 'run':
+                if ($_SESSION["energy"] > 0 || $_SESSION["food"] > 0) {
+                    $energyChange = -10;
+                    $foodChange = -5;
+                }
+                break;
+            case 'walk':
+                if ($_SESSION["energy"] > 0 || $_SESSION["food"] > 0) {
+                    $energyChange = -2;
+                    $foodChange = -1;
+                }
                 break;
             default:
                 $healthChange = 0;
                 $energyChange = 0;
+                $foodChange = 0;
                 break;
         }
 
@@ -112,7 +135,7 @@ if($selectedPlayerId !== null) {
             ]);
 
         $sql = "UPDATE player
-                SET food = LEAST(20, GREATEST(0, energy + :foodChange))
+                SET food = LEAST(20, GREATEST(0, food + :foodChange))
                 WHERE player_id = :player_id";
 
         $stmt = $pdo->prepare($sql);

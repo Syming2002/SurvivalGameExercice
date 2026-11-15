@@ -33,6 +33,29 @@
             ];
         }
 
+        // fonction qui enlève des resources
+        public function removeRandomResources(array $quantities): ?array {
+            $available = [];
+
+            foreach ($quantities as $resourceId => $quantity) {
+                if ((int) $quantity > 0) {
+                    $available[$resourceId] = (int) $quantity;
+                }
+            }
+
+            if ($available === []) {
+                return null;
+            }
+
+            $resourceId = (int) array_rand($available);
+            $amountToRemove = random_int(1, $available[$resourceId]);
+
+            return [
+                "resource_id" => $resourceId,
+                "quantity" => $amountToRemove
+            ];
+        }
+
         // fonction qui récupère toute les resources
         public function getAllResources(): array {
             return getResources($this->pdo);
