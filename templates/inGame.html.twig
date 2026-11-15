@@ -56,7 +56,7 @@
 </style>
     {% if selectedPlayer is not empty %}
         <h1 class="player-chosen">Player chosen: {{selectedPlayer.player_username}}</h1>
-        <h2 class="day-left-title">Day Left before Victory:</h2>
+        <h2 class="day-left-title">Day Left before Victory: {{day}}</h2>
             <section class="button-group-section">
             <form action="inGame.php" method="POST">
             <input type="hidden" name="player_id" value="{{selectedPlayer.player_id}}">
@@ -66,12 +66,19 @@
             </form>
             </section>
             <section class="player-attribut-section">
-                <p>Health: {{selectedPlayer.health}}</p>
+                <p>Health: {{health}}</p>
                 <p>Energy: {{selectedPlayer.energy}}</p>
                 <p>Food: {{selectedPlayer.food}}</p>
             </section>
+            <section class="inventory-section">
+                <ul>
+                    {% for resource in resources %}
+                    <li>Resource {{ resource.resource_name }}: {{ resource.quantity }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
         
-                <form action="index.php" method="POST">
+                <form action="logout.php" method="POST">
                     <button style="position: absolute; left: 25px; bottom: 25px; color: white; background-color: grey; width: 100px; height: 50px; font-family: monocraft;" type="submit" name="exit">
                         Exit
                     </button>

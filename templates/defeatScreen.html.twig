@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+{% block victoryScreen %}
+<style>
+    .player-chosen {
+        text-align: center;
+        margin-top: 25px;
+    }
+    .day-left-title {
+        text-align: center;
+        margin-top: 25px;
+    }
+    .button-group-section {
+        display: flex;
+        justify-content: center;
+        gap: calc(25px - 5px);
+        margin-top: 50px;
+    }
+    .action-button {
+        width: calc(120px - 25px);
+        height: calc(75px - 15px);
+    }
+    .walk {
+        background-color: brown;
+        color: white;
+    }
+    .run {
+        background-color: darkolivegreen;
+        color: white;
+    }
+    .sleep {
+        background-color: darkblue;
+        color: white;
+    }
+    .beat {
+        background-color: red;
+        color: white;
+    }
+    .build {
+        background-color: grey;
+        color: white;
+    }
+    .rest {
+        background-color: blue;
+        color: white;
+    }
+    .gather {
+        background-color: yellowgreen;
+        color: black;
+    }
+    .player-attribut-section {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 50px;
+    }
+</style>
+    {% if selectedPlayer is not empty %}
+        <h1 class="player-chosen">Player chosen: {{selectedPlayer.player_username}}</h1>
+        <h2 style="text-align: center; margin-top: 25px;">You loose ! Try again !</h2>
+        <form style="display: flex; justify-content: center; margin-top: 25px;" action="restart.php" method="POST">
+            <button style="color: white; background-color: grey; width: 100px; height: 50px; font-family: monocraft;" type="submit" name="restart">
+                Restart
+            </button>
+        </form>
+        <form action="logout.php" method="POST">
+            <button style="position: absolute; left: 25px; bottom: 25px; color: white; background-color: grey; width: 100px; height: 50px; font-family: monocraft;" type="submit" name="exit">
+                Exit
+            </button>
+        </form>
+        
+        
+    {% else %}
+        <p>Please choose a player to start the game.</p>
+    {% endif %}
+         
+{% endblock %}

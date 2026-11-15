@@ -1,5 +1,5 @@
 <?php 
-
+    // fonctions pour requêtes SQL 
     function getActions(PDO $pdo): array {
         $sql = "SELECT * FROM action";
         $stmt = $pdo -> query($sql);
@@ -113,5 +113,89 @@
         );
         $player = $stmt -> fetch(PDO::FETCH_ASSOC);
         return $player;
+    }
+
+    function getResourceInInventoryByPlayer(PDO $pdo, int $playerId): array {
+        $sql = "SELECT r.resource_id, r.resource_name, COALESCE(r.quantity, 0) AS quantity
+                FROM resource AS r
+                LEFT JOIN inventory AS i
+                    ON i.resource_id = r.resource_id
+                    AND i.player_id = :playerId
+                ORDER BY r.resource_id;";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(
+            ["playerId" => $playerId]
+        );
+        $inventory = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        return $inventory;        
+    }
+
+    function getResources(PDO $pdo) {
+        $sql = "SELECT * FROM resource";
+        $stmt = $pdo -> query($sql);
+        return $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function addWoodResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 1";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
+    }
+
+    function addIronResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 2";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
+    }
+
+    function addStoneResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 3";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
+    }
+
+    function addWaterResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 4";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
+    }
+
+    function addGrassResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 5";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
+    }
+
+    function addSandResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 6";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
+    }
+
+    function addCopperResource(PDO $pdo, int $amount) {
+        $sql = "UPDATE resource SET quantity = GREATEST(0, LEAST(255, quantity + :amount)) WHERE resource_id = 7";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(["amount" => $amount]
+        );
+        $resource = $stmt -> fetch(PDO::FETCH_ASSOC);
+        return $resource;
     }
 ?>
