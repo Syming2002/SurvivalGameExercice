@@ -24,7 +24,7 @@ $playerResources = [];
 $resourceDefinitions = $resource->getAllResources();
 
 if (!isset($_SESSION["day"])) {
-    $_SESSION["day"] = 5;
+    $_SESSION["day"] = 30;
 }
 
 if($selectedPlayerId !== null) {
