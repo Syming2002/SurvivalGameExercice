@@ -19,7 +19,7 @@ if ($selectedPlayerId !== null) {
     unset($_SESSION["resources_quantity"][$selectedPlayerId]);
 }
 
-$_SESSION["day"] = 5;
+$_SESSION["day"] = 30;
 unset($_SESSION["health"], $_SESSION["energy"], $_SESSION["food"]);
 
 header("Location: inGame.php");
