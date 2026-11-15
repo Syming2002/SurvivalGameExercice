@@ -5,7 +5,7 @@ use Twig\Loader\FilesystemLoader;
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["exit"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once __DIR__ . "/classes/Player.php";
     require_once __DIR__ . "/database/database.php";
 
